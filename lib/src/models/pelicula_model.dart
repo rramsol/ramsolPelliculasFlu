@@ -1,9 +1,10 @@
 class Peliculas {
-
+//
   List<Pelicula> items = new List();
-
+//constructor
   Peliculas();
 
+//metodo para devolver las lista de peliculas
   Peliculas.fromJsonList( List<dynamic> jsonList  ) {
 
     if ( jsonList == null ) return;
@@ -12,12 +13,8 @@ class Peliculas {
       final pelicula = new Pelicula.fromJsonMap(item);
       items.add( pelicula );
     }
-
   }
-
 }
-
-
 
 class Pelicula {
   int voteCount;
@@ -72,5 +69,12 @@ class Pelicula {
 
   }
 
+  getPostImg(){
+    if(posterPath == null){
+      return 'https://diariodepalabras.files.wordpress.com/2012/06/no-hay-foto.jpg';
+    }else{
+      return 'https://image.tmdb.org/t/p/w500/$posterPath';
+    }
+  }
 
 }
