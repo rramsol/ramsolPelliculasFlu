@@ -77,4 +77,12 @@ class Pelicula {
     }
   }
 
+  getbackgroundImage(){
+    if(posterPath == null){
+      return 'https://diariodepalabras.files.wordpress.com/2012/06/no-hay-foto.jpg';
+    }else{
+      return 'https://image.tmdb.org/t/p/w500/$backdropPath';
+    }
+  }
+
 }

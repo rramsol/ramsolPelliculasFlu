@@ -12,6 +12,7 @@ class HomePage  extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    peliculasProvider.getPopulares();
     return Scaffold(
       appBar: AppBar(
         title: Text('Peliculas en cines RAMSOL'),
@@ -68,14 +69,19 @@ class HomePage  extends StatelessWidget {
               child: Text('Populares: ',style: Theme.of(context).textTheme.subtitle1)
           ),
           SizedBox(height: 10.0),
-          FutureBuilder(
-            future: peliculasProvider.getPopulares(),
+          StreamBuilder(
+            stream: peliculasProvider.popularesStream,
             builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+
               if(snapshot.hasData){
-                return MovieHorizontal(peliculas: snapshot.data,);
+                return MovieHorizontal(
+                  peliculas: snapshot.data,
+                  siguientePagina: peliculasProvider.getPopulares,
+                );
               }else{
                 return Center(child: CircularProgressIndicator());
               }
+
             },
           ),
         ],
